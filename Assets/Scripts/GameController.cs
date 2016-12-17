@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
 	public float waveWait;
 	
 	public Text scoreText;
+	public Text speedText;
 	public Text restartText;
 	public Text gameOverText;
 	
@@ -71,6 +72,10 @@ public class GameController : MonoBehaviour
 	{
 		score += newScoreValue;
 		UpdateScore ();
+	}
+
+	public void UpdateSpeed (float speed){
+		speedText.text = "Speeed: " + speed;
 	}
 	
 	void UpdateScore ()

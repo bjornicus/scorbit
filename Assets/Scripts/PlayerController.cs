@@ -9,6 +9,7 @@ public class Boundary
 
 public class PlayerController : MonoBehaviour
 {
+
 	public float thrustPower;
 	public Boundary boundary;
 
@@ -20,6 +21,20 @@ public class PlayerController : MonoBehaviour
 	public ParticleSystem leftThruster;
 
 	const int thrusterParticleCount = 20;
+	
+	private GameController gameController;
+
+	void Start(){
+		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
+		if (gameControllerObject != null)
+		{
+			gameController = gameControllerObject.GetComponent <GameController>();
+		}
+		if (gameController == null)
+		{
+			Debug.Log ("Cannot find 'GameController' script");
+		}
+	}
 
 	void NormalMoveScheme (Rigidbody rigidbody)
 	{
@@ -77,6 +92,7 @@ public class PlayerController : MonoBehaviour
 			AltMoveScheme (rigidbody);
 		} else {
 			NormalMoveScheme (rigidbody);
-		}		
+		}
+		gameController.UpdateSpeed (rigidbody.velocity.magnitude);
 	}
 }
